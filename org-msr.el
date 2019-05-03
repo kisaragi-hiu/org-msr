@@ -3,7 +3,7 @@
 ;; Author: Kisaragi Hiu
 ;; Version: 0.2.0
 ;; Package-Requires: ((emacs "24.4"))
-;; Homepage: https://kisaragi-hiu.com/org-msr
+;; Homepage: https://kisaragi-hiu.com/projects/org-msr
 ;; Keywords: convenience org
 
 
