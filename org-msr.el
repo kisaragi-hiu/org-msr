@@ -38,6 +38,8 @@
   :prefix "org-msr-")
 
 (defcustom org-msr-frequency-alist
+  ;; The "/1d" "/5h" suffixes are not magic, they simply help you
+  ;; choose a new frequency in `org-todo'.
   '(("NOMEMORY/5h" . "5h")
     ("DAILY/1d" . "1d")
     ("HARD/3d" . "3d")
