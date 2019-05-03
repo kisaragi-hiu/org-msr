@@ -72,6 +72,11 @@
       (setq org-table-coordinate-overlays nil))
     (org-save-outline-visibility 'use-markers (org-mode-restart))))
 
+(defvar org-msr-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-c _") 'org-msr-update-repeater)
+    map)
+  "Keymap for `org-msr-mode'.")
 
 ;;;###autoload
 (defun org-msr-set-up-file ()
@@ -105,7 +110,20 @@ already exist.
 
 ;;;###autoload
 (define-minor-mode org-msr-mode
-  "Minor mode to update repeater based on todo keywords."
+  "Org-msr (Minimal Spaced Repetition) minor mode.
+
+Every TODO heading will get a repeating schedule based on their
+TODO keyword, as defined in `org-msr-frequency-alist'.
+
+The repeaters are updated everytime `org-todo' is called.
+
+\\<org-msr-mode-map>
+\\[org-msr-update-repeater] to explicitly update repeaters.
+\\[org-msr-set-up-file] to set up file for Org-msr, which see.
+
+\\{org-msr-mode-map}"
+  :group 'org-msr :init-value nil :lighter " Org-msr"
+  :keymap org-msr-mode-map
   (if org-msr-mode
       (advice-add 'org-todo :after #'org-msr-update-repeater)
     (advice-remove 'org-todo #'org-msr-update-repeater)))
