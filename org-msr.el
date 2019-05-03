@@ -1,31 +1,28 @@
 ;;; org-msr.el --- summary -*- lexical-binding: t -*-
-
-;; Author: Kisaragi Hiu
+;;
+;; Author: Kisaragi Hiu <mail@kisaragi-hiu.com>
 ;; Version: 0.4.0
 ;; Package-Requires: ((emacs "24.4"))
 ;; Homepage: https://kisaragi-hiu.com/projects/org-msr
 ;; Keywords: convenience org
-
-
-;; This file is not part of GNU Emacs
-
-;; This file is free software; you can redistribute it and/or modify
+;;
+;; This program is not part of GNU Emacs.
+;;
+;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
 ;; the Free Software Foundation; either version 3, or (at your option)
 ;; any later version.
-
+;;
 ;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
-
+;;
 ;; For a full copy of the GNU General Public License
 ;; see <http://www.gnu.org/licenses/>.
-
-
 ;;; Commentary:
-
-;; Minimal spaced repetition setup.
+;; A minimal (manual) spaced repetition setup using Org, repeating
+;; schedules, and todo keywords.
 
 ;;; Code:
 (require 'org)
