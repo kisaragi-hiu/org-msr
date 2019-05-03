@@ -51,7 +51,7 @@
   :group 'org-msr
   :type '(alist :key-type string :value-type string))
 
-(defvar org-msr-setup-heading-name "Setup")
+(defvar org-msr-setup-heading-name "Org-msr Setup")
 (defvar org-msr-filetags '("org-msr")
   "Filetags added when setting up org-msr with `org-msr-set-up-file'.")
 
