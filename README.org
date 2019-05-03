@@ -1,0 +1,3 @@
+* org-msr
+
+Minimal Spaced Repetition setup for Org mode.
