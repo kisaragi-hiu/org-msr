@@ -1,7 +1,7 @@
 ;;; org-msr.el --- summary -*- lexical-binding: t -*-
 
 ;; Author: Kisaragi Hiu
-;; Version: 0.2.0
+;; Version: 0.3.0
 ;; Package-Requires: ((emacs "24.4"))
 ;; Homepage: https://kisaragi-hiu.com/projects/org-msr
 ;; Keywords: convenience org
