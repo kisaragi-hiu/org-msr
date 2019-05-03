@@ -1,8 +1,8 @@
 ;;; org-msr.el --- summary -*- lexical-binding: t -*-
 
 ;; Author: Kisaragi Hiu
-;; Version: 0.1.0
-;; Package-Requires: ((emacs "24.3"))
+;; Version: 0.2.0
+;; Package-Requires: ((emacs "24.4"))
 ;; Homepage: https://kisaragi-hiu.com/org-msr
 ;; Keywords: convenience org
 
@@ -51,7 +51,15 @@
   :group 'org-msr
   :type '(alist :key-type string :value-type string))
 
-(defun org-msr-update-repeater ()
+;;;###autoload
+(define-minor-mode org-msr-mode
+  "Minor mode to update repeater based on todo keywords."
+  (if org-msr-mode
+      (advice-add 'org-todo :after #'org-msr-update-repeater)
+    (advice-remove 'org-todo #'org-msr-update-repeater)))
+
+;;;###autoload
+(defun org-msr-update-repeater (&rest _)
   "Update repeater for each org-msr item based on their familiarity."
   (interactive)
   (save-excursion
