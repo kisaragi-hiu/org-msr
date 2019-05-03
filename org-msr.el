@@ -37,7 +37,7 @@
   :group 'org
   :prefix "org-msr-")
 
-(defcustom org-msr-frequency-alist
+(defcustom org-msr-keyword-frequency-alist
   ;; The "/1d" "/5h" suffixes are not magic, they simply help you
   ;; choose a new frequency in `org-todo'.
   '(("NOMEMORY/5h" . "5h")
@@ -86,7 +86,7 @@ Will only do anything if a heading named by
 `org-msr-setup-heading-name' (default \"Org-msr Setup\") doesn't
 already exist.
 
-- Add TODO keyword definitions
+- Add TODO keyword definitions according to `org-msr-keyword-frequency-alist'
 - Add FILETAGS according to `org-msr-filetags'
 - Tell Emacs to start org-msr-mode in this file"
   (interactive)
@@ -99,7 +99,7 @@ already exist.
               ;; TODO keywords
               (mapconcat (lambda (pair)
                            (format "#+TODO: %s | DONE(d)\n" (car pair)))
-                         org-msr-frequency-alist
+                         org-msr-keyword-frequency-alist
                          "\n")
               ;; FILETAGS
               (format "#+FILETAGS: :%s:\n"
@@ -113,7 +113,7 @@ already exist.
   "Org-msr (Minimal Spaced Repetition) minor mode.
 
 Every TODO heading will get a repeating schedule based on their
-TODO keyword, as defined in `org-msr-frequency-alist'.
+TODO keyword, as defined in `org-msr-keyword-frequency-alist'.
 
 The repeaters are updated everytime `org-todo' is called.
 
@@ -133,7 +133,7 @@ The repeaters are updated everytime `org-todo' is called.
   "Update repeater for each org-msr item based on their familiarity."
   (interactive)
   (save-excursion
-    (pcase-dolist (`(,keyword . ,frequency) org-msr-frequency-alist)
+    (pcase-dolist (`(,keyword . ,frequency) org-msr-keyword-frequency-alist)
       (setf (point) (point-min))
       (while (search-forward (format "* %s" keyword) nil t)
         (if (org-get-scheduled-time (point))
