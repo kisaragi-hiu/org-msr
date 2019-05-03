@@ -92,7 +92,7 @@ already exist.
       (insert "\n* " org-msr-setup-heading-name "\n"
               ;; TODO keywords
               (mapconcat (lambda (pair)
-                           (format "#+TODO: %s | DONE(d)\n" (car pair)))
+                           (format "#+TODO: %s | DONE(d)" (car pair)))
                          org-msr-keyword-frequency-alist
                          "\n"))
       (add-file-local-variable 'eval '(org-msr-mode 1))
