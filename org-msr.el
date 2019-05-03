@@ -80,7 +80,7 @@
 
 ;;;###autoload
 (defun org-msr-set-up-file ()
-  "Add file-local setup for org-msr in this file.
+  "Set this file up for org-msr.
 
 Will only do anything if a heading named by
 `org-msr-setup-heading-name' (default \"Org-msr Setup\") doesn't
