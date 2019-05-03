@@ -74,7 +74,7 @@
   "Keymap for `org-msr-mode'.")
 
 ;;;###autoload
-(defun org-msr-set-up-file ()
+(defun org-msr-setup ()
   "Set this file up for org-msr.
 
 Will only do anything if a heading named by
@@ -110,7 +110,7 @@ The repeaters are updated everytime `org-todo' is called.
 
 \\<org-msr-mode-map>
 \\[org-msr-update-repeater] to explicitly update repeaters.
-\\[org-msr-set-up-file] to set up file for Org-msr, which see.
+\\[org-msr-setup] to set up this file for Org-msr, which see.
 
 \\{org-msr-mode-map}"
   :group 'org-msr :init-value nil :lighter " Org-msr"
