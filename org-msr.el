@@ -1,7 +1,7 @@
 ;;; org-msr.el --- summary -*- lexical-binding: t -*-
 
 ;; Author: Kisaragi Hiu
-;; Version: 0.3.0
+;; Version: 0.4.0
 ;; Package-Requires: ((emacs "24.4"))
 ;; Homepage: https://kisaragi-hiu.com/projects/org-msr
 ;; Keywords: convenience org
@@ -88,7 +88,7 @@ already exist.
     (setf (point) (point-min))
     (if (search-forward (concat "* " org-msr-setup-heading-name) nil t)
         (message "%s" "Org-msr is already set up")
-      (setf (point) (point-min))
+      (setf (point) (point-max))
       (insert "\n* " org-msr-setup-heading-name "\n"
               ;; TODO keywords
               (mapconcat (lambda (pair)
