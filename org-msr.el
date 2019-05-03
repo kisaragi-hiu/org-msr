@@ -51,6 +51,48 @@
   :group 'org-msr
   :type '(alist :key-type string :value-type string))
 
+(defvar org-msr-setup-heading-name "Setup")
+(defvar org-msr-filetags '("org-msr")
+  "Filetags added when setting up org-msr with `org-msr-set-up-file'.")
+
+(defun org-msr--refresh-org ()
+  "Refresh Org exactly like what \\[org-ctrl-c-ctrl-c] in a #+TODO line does."
+  (let ((org-inhibit-startup-visibility-stuff t)
+        (org-startup-align-all-tables nil))
+    (when (boundp 'org-table-coordinate-overlays)
+      (mapc #'delete-overlay org-table-coordinate-overlays)
+      (setq org-table-coordinate-overlays nil))
+    (org-save-outline-visibility 'use-markers (org-mode-restart))))
+
+(defun org-msr-set-up-file ()
+  "Add file-local setup for org-msr in this file.
+
+Will only do anything if a heading named by
+`org-msr-setup-heading-name' (default \"Org-msr Setup\") doesn't
+already exist.
+
+- Add TODO keyword definitions
+- Add FILETAGS according to `org-msr-filetags'
+- Tell Emacs to start org-msr-mode in this file"
+  (interactive)
+  (save-excursion
+    (setf (point) (point-min))
+    (if (search-forward (concat "* " org-msr-setup-heading-name) nil t)
+        (message "%s" "Org-msr is already set up")
+      (setf (point) (point-min))
+      (insert "\n* " org-msr-setup-heading-name "\n"
+              ;; TODO keywords
+              (mapconcat (lambda (pair)
+                           (format "#+TODO: %s | DONE(d)\n" (car pair)))
+                         org-msr-frequency-alist
+                         "\n")
+              ;; FILETAGS
+              (format "#+FILETAGS: :%s:\n"
+                      (mapconcat #'identity org-msr-filetags ":")))
+      (add-file-local-variable 'eval '(org-msr-mode 1))
+      (org-msr--refresh-org)
+      (message "%s" "Org-msr has been set up"))))
+
 ;;;###autoload
 (define-minor-mode org-msr-mode
   "Minor mode to update repeater based on todo keywords."
