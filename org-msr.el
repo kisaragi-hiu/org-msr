@@ -70,6 +70,8 @@
       (setq org-table-coordinate-overlays nil))
     (org-save-outline-visibility 'use-markers (org-mode-restart))))
 
+
+;;;###autoload
 (defun org-msr-set-up-file ()
   "Add file-local setup for org-msr in this file.
 
