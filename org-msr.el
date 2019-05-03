@@ -58,11 +58,6 @@
   :group 'org-msr
   :type 'string)
 
-(defcustom org-msr-filetags '("org-msr")
-  "Filetags added when setting up org-msr with `org-msr-set-up-file'."
-  :group 'org-msr
-  :type '(repeat string))
-
 (defun org-msr--refresh-org ()
   "Refresh Org exactly like what \\[org-ctrl-c-ctrl-c] in a #+TODO line does."
   (let ((org-inhibit-startup-visibility-stuff t)
@@ -87,7 +82,6 @@ Will only do anything if a heading named by
 already exist.
 
 - Add TODO keyword definitions according to `org-msr-keyword-frequency-alist'
-- Add FILETAGS according to `org-msr-filetags'
 - Tell Emacs to start org-msr-mode in this file"
   (interactive)
   (save-excursion
@@ -100,10 +94,7 @@ already exist.
               (mapconcat (lambda (pair)
                            (format "#+TODO: %s | DONE(d)\n" (car pair)))
                          org-msr-keyword-frequency-alist
-                         "\n")
-              ;; FILETAGS
-              (format "#+FILETAGS: :%s:\n"
-                      (mapconcat #'identity org-msr-filetags ":")))
+                         "\n"))
       (add-file-local-variable 'eval '(org-msr-mode 1))
       (org-msr--refresh-org)
       (message "%s" "Org-msr has been set up"))))
